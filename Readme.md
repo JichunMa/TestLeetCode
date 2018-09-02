@@ -1,5 +1,5 @@
 # Personal Leetcode result set
-- [x] **2018/09/02 开发**
+- [x] **2018/09/02 第一周**
   - [x] 1 Two Sum
   - [x] 2 Add Two Numbers
   - [x] 7 Reverse Integer
