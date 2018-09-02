@@ -1,4 +1,4 @@
-# Personal Leetcode result set
+# personal LeetCode result set
 - [x] **2018/09/02 第一周**
   - [x] 1 Two Sum
   - [x] 2 Add Two Numbers
