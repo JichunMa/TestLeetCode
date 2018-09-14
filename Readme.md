@@ -15,6 +15,9 @@
 ```
  String stringRemoveSymbol = s.replaceAll("[^a-z^A-Z^0-9]", "");
 ```
-               
+#### replaceAll 正则符号替换
+```
+  String digitalStringNoPlus = digitalString.replaceAll("[+]", "");
+```              
 
 

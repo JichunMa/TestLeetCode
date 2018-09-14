@@ -96,27 +96,19 @@ public class Solution {
                     return builder.toString();
                 }
             } else {
-                // TODO: 2018/9/13 等待重构 
-                if (ch == 45) {
+                if (ch == 45 || ch == 43) {
                     if (isDigital) {
                         return builder.toString();
                     } else {
                         if (isPlus || isMinus) {
                             return "";
                         } else {
-                            isMinus = true;
                             builder.append(ch);
-                        }
-                    }
-                } else if (ch == 43) {
-                    if (isDigital) {
-                        return builder.toString();
-                    } else {
-                        if (isPlus || isMinus) {
-                            return "";
-                        } else {
-                            isPlus = true;
-                            builder.append(ch);
+                            if (ch == 45) {
+                                isMinus = true;
+                            } else {
+                                isPlus = true;
+                            }
                         }
                     }
                 } else if (ch >= 48 && ch <= 57) {
@@ -129,7 +121,6 @@ public class Solution {
         }
         return builder.toString();
     }
-
 
 
 }
