@@ -3,7 +3,7 @@ package number008;
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String num = "42";
+        String num = "+-123";
         int result = solution.myAtoi(num);
         System.out.println(result);
     }
@@ -52,18 +52,13 @@ public class Solution {
         StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < chars.length; i++) {
-            if (i == 0) {
-                if (chars[0] == '-' || chars[0] == '+') {
+            if (chars[i] == '-' || chars[i] == '+'){
+                if (i == 0) {
                     builder.append(chars[0]);
-                } else {
-                    if (isFrontZero && chars[i] == '0') {
-                        builder.append("");
-                    } else {
-                        isFrontZero = false;
-                        builder.append(chars[i]);
-                    }
+                }else{
+                    break;
                 }
-            } else {
+            }else{
                 if (isFrontZero && chars[i] == '0') {
                     builder.append("");
                 } else {
