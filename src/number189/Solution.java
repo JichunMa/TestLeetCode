@@ -1,6 +1,6 @@
 package number189;
 
-// TODO: 2018/9/25  需求3种方式实现已经完成(1/3) 
+// TODO: 2018/9/25  需求3种方式实现已经完成(1/3)
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
