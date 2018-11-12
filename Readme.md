@@ -5,7 +5,7 @@
   - [x] 7 Reverse Integer
   - [x] 9 Palindrome Number
   - [x] 125 Valid Palindrome
-- [x] **2018/11/12 **
+- [x] **2018/11/12**
   - [x] 104 Maximum Depth Of Binary Tree
  
 
