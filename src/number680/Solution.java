@@ -1,12 +1,11 @@
+package number680;
 
-
-public class Main {
-
+public class Solution {
     public static void main(String[] args) {
-        String str = "abc";
-        System.out.println(validPalindrome(str));
+        Solution solution = new Solution();
+        boolean result = solution.validPalindrome("abc");
+        System.out.println(result);
     }
-
 
     public static boolean validPalindrome(String s) {
         if (s == null || s.length() == 0) {
@@ -33,5 +32,4 @@ public class Main {
         }
         return true;
     }
-
 }
