@@ -1,6 +1,6 @@
+package number415;
 
-
-public class Main {
+public class Solution {
 
     public static void main(String[] args) {
         String num1 = "99";
@@ -8,7 +8,6 @@ public class Main {
         System.out.println(addStrings(num1, num2));
 
     }
-
 
     public static String addStrings(String num1, String num2) {
         boolean isHasCarry = false;
@@ -84,6 +83,4 @@ public class Main {
         //0 对应的 ASCII 码为0
         return ch - 48;
     }
-
-
 }
