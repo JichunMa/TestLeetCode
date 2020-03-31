@@ -1,6 +1,5 @@
 package number002;
 
-import java.util.ArrayList;
 
 
 public class Solution {
@@ -29,123 +28,52 @@ public class Solution {
         }
     }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        boolean addFlag = false;//进位标示
-        int sum = 0;
-        int singleDigitResult = 0;
-        ArrayList<Integer> resultList = new ArrayList<>();
-
-        if (isAllZero(l1) && isAllZero(l2)) {
-            resultList.add(0);
-        } else if (isAllZero(l1)) {
-            ListNode node = l2;
-            while (node != null && node.val != 0) {
-                resultList.add(node.val);
-                node = node.next;
-            }
-        } else if (isAllZero(l2)) {
-            ListNode node = l1;
-            while (node != null && node.val != 0) {
-                resultList.add(node.val);
-                node = node.next;
-            }
-        } else {
-            ArrayList<Integer> arrayList1 = new ArrayList<>();
-            ArrayList<Integer> arrayList2 = new ArrayList<>();
-            int lengthList1 = getListLength(l1);
-            int lengthList2 = getListLength(l2);
-            int minusValue = lengthList1 - lengthList2;
-            if (minusValue != 0) {
-                if (minusValue > 0) {
-                    for (int i = minusValue; i > 0; i--) {
-                        ListNode node = new ListNode(0);
-                        getRealNode(l2).next = node;
-                    }
-                } else {
-                    for (int i = minusValue; i < 0; i++) {
-                        ListNode node = new ListNode(0);
-                        getRealNode(l1).next = node;
-                    }
-                }
-            }
-            ListNode currentNode = l1;
-            while (currentNode != null) {
-                arrayList1.add(currentNode.val);
-                currentNode = currentNode.next;
-            }
-            currentNode = l2;
-            while (currentNode != null) {
-                arrayList2.add(currentNode.val);
-                currentNode = currentNode.next;
-            }
-
-            int length = arrayList1.size();
-            int index = 0;
-            while (index < length) {
-                Integer arg1 = arrayList1.get(index);
-                Integer arg2 = arrayList2.get(index);
-                sum = arg1 + arg2;
-                if (addFlag) {
-                    //处理进位
-                    sum = sum + 1;
-                    addFlag = false;
-                }
-                if (sum / 10 > 0) {
-                    addFlag = true;
-                    singleDigitResult = sum % 10;
-                } else {
-                    singleDigitResult = sum;
-                }
-                resultList.add(singleDigitResult);
-                index++;
-            }
-            if (addFlag) {
-                resultList.add(1);
-            }
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
         }
+        if (l2 == null) {
+            return l1;
+        }
+        boolean isCarry = false;
+        ListNode node1 = l1;
+        ListNode node2 = l2;
         ListNode head = null;
-        ListNode lastNode = null;
-        for (int data : resultList) {
-            ListNode node = new ListNode(data);
-            if (head == null) {
-                head = node;
-            } else {
-                lastNode.next = node;
+        ListNode currentNode = null;
+        while (node1 != null || node2 != null) {
+            int value1 = node1 != null ? node1.val : 0;
+            int value2 = node2 != null ? node2.val : 0;
+            int tmp = value1 + value2;
+            if (isCarry) {
+                tmp++;
+                isCarry = false;
             }
-            lastNode = node;
+            int value = tmp;
+            if (tmp >= 10) {
+                value = tmp % 10;
+                isCarry = true;
+            }
+            if (currentNode == null) {
+                currentNode = new ListNode(value);
+                head = currentNode;
+            } else {
+                ListNode tmpNode = new ListNode(value);
+                currentNode.next = tmpNode;
+                currentNode = tmpNode;
+            }
+            if (node1 != null) {
+                node1 = node1.next;
+            }
+
+            if (node2 != null) {
+                node2 = node2.next;
+            }
+
+        }
+
+        if (isCarry) {
+            currentNode.next = new ListNode(1);
         }
         return head;
-    }
-    boolean isAllZero(ListNode listNode) {
-        ListNode node = listNode;
-        boolean isAllZero = true;
-        while (node != null) {
-            if (node.val != 0) {
-                isAllZero = false;
-                return isAllZero;
-            }
-            node = node.next;
-        }
-        return isAllZero;
-    }
-
-    int getListLength(ListNode listNode) {
-        int length = 0;
-        ListNode node = listNode;
-        while (node != null) {
-            length = length + 1;
-            node = node.next;
-        }
-        return length;
-    }
-
-    ListNode getRealNode(ListNode listNode) {
-        ListNode node = listNode;
-        ListNode lastNode = listNode;
-        while (node != null) {
-            lastNode = node;
-            node = node.next;
-        }
-        return lastNode;
     }
 }
