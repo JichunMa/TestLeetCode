@@ -32,58 +32,47 @@ public class Solution {
 
     }
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+
+        if (l2 == null) {
+            return l1;
+        }
         ListNode head = null;
-        ListNode current = null;
-        ListNode headL1;
-        ListNode headL2;
-        headL1 = l1;
-        headL2 = l2;
-        while (headL1 != null && headL2 != null) {
-            if (headL1.val < headL2.val) {
-                ListNode newNode = new ListNode(headL1.val);
-                if (null == head) {
-                    head = newNode;
-                    current = head;
-                } else {
-                    current.next = newNode;
-                    current = newNode;
-                }
-                headL1 = headL1.next;
+        ListNode lastNode = null;
+        ListNode newNode;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                newNode = new ListNode(l1.val);
+                l1 = l1.next;
             } else {
-                ListNode newNode = new ListNode(headL2.val);
-                if (null == head) {
-                    head = newNode;
-                    current = head;
-                } else {
-                    current.next = newNode;
-                    current = newNode;
-                }
-                headL2 = headL2.next;
+                newNode = new ListNode(l2.val);
+                l2 = l2.next;
+            }
+
+            if (head == null) {
+                head = newNode;
+                lastNode = newNode;
+            } else {
+                lastNode.next = newNode;
+                lastNode = newNode;
             }
         }
 
-        while (headL1 != null) {
-            ListNode newNode = new ListNode(headL1.val);
-            if (null == head) {
-                head = newNode;
-                current = head;
-            } else {
-                current.next = newNode;
-                current = newNode;
-            }
-            headL1 = headL1.next;
+        while (l1 != null) {
+            newNode = new ListNode(l1.val);
+            lastNode.next = newNode;
+            lastNode = newNode;
+            l1 = l1.next;
         }
-        while (headL2 != null) {
-            ListNode newNode = new ListNode(headL2.val);
-            if (null == head) {
-                head = newNode;
-                current = head;
-            } else {
-                current.next = newNode;
-                current = newNode;
-            }
-            headL2 = headL2.next;
+
+        while (l2 != null) {
+            newNode = new ListNode(l2.val);
+            lastNode.next = newNode;
+            lastNode = newNode;
+            l2 = l2.next;
         }
         return head;
     }
