@@ -21,34 +21,27 @@ public class Solution {
         }
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (head == null) {
+    public  ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head.next == null) {
             return null;
         }
-        int length = 0;
-        ListNode node = head;
-        ListNode lastNode = head;
-        while (node != null) {
-            length++;
-            node = node.next;
+
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode slow = dummy;
+        ListNode quick = dummy;
+
+        for (int i = 0; i < n; i++) {
+            quick = quick.next;
         }
-        int minus = length - n;
-        node = head;
-        for (int i = 1; i < minus + 1; i++) {
-            lastNode = node;
-            node = node.next;
+
+        while (quick.next != null) {
+            slow = slow.next;
+            quick = quick.next;
         }
-        ListNode nextNode = node.next;
-        if (nextNode != null) {
-            node.val = nextNode.val;
-            node.next = nextNode.next;
-        } else {
-            if (length == 1) {
-                return null;
-            } else {
-                lastNode.next = null;
-            }
-        }
-        return head;
+
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 }
