@@ -1,6 +1,8 @@
+package number007;
+
 import java.util.Stack;
 
-public class Main {
+public class Solution {
 
     public static void main(String[] args) {
         System.out.println(reverse(-2147483648));
@@ -35,13 +37,12 @@ public class Main {
             result = 0 - result;
         }
         //比较边界值
-        if (result <= Integer.MIN_VALUE) {
+        if (result < Integer.MIN_VALUE) {
             return 0;
         }
-        if (result >= Integer.MAX_VALUE) {
+        if (result > Integer.MAX_VALUE) {
             return 0;
         }
         return (int) result;
     }
-
 }
