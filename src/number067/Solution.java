@@ -1,4 +1,6 @@
-public class Main {
+package number067;
+
+public class Solution {
 
     public static void main(String[] args) {
         String a = "1010";
@@ -86,6 +88,4 @@ public class Main {
     public static int getValue(char ch) {
         return ch - '0';
     }
-
 }
-
