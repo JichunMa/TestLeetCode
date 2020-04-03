@@ -9,113 +9,75 @@ public class Solution {
     }
 
 
-    public int myAtoi(String str) {
-        if (str == null || str.equals("")) {
+    public static int myAtoi(String str) {
+        if (str == null || str.length() == 0) {
             return 0;
         }
-        String digitalString = extractDigitalString(str);
-        digitalString = trimFrontZero(digitalString);
-        if (digitalString.equals("-") || digitalString.equals("+")) {
+        String source = str.trim();
+        if (source.length() == 0) {
             return 0;
         }
-
-        String strIntegerMax = String.valueOf(Integer.MAX_VALUE);
-        String strIntegerMin = String.valueOf(Integer.MIN_VALUE);
-
-        if (digitalString.indexOf('-') == 0) {
-            if (digitalString.length() > strIntegerMin.length()) {
-                return Integer.MIN_VALUE;
-            } else if (digitalString.length() == strIntegerMin.length()) {
-                if (digitalString.compareTo(strIntegerMin) > 0) {
-                    return Integer.MIN_VALUE;
-                }
-            }
-        } else {
-            String digitalStringNoPlus = digitalString.replaceAll("[+]", "");
-            if (digitalStringNoPlus.length() > strIntegerMax.length()) {
-                return Integer.MAX_VALUE;
-            } else if (digitalStringNoPlus.length() == strIntegerMax.length()) {
-                if (digitalStringNoPlus.compareTo(strIntegerMax) > 0) {
-                    return Integer.MAX_VALUE;
-                }
-            }
-        }
-        if (digitalString.equals("")) {
-            return 0;
-        }
-        return Integer.parseInt(digitalString);
-    }
-
-    public String trimFrontZero(String source) {
-        char[] chars = source.toCharArray();
-        boolean isFrontZero = true;
+        boolean isNavigate = false;
         StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == '-' || chars[i] == '+'){
-                if (i == 0) {
-                    builder.append(chars[0]);
-                }else{
-                    break;
-                }
-            }else{
-                if (isFrontZero && chars[i] == '0') {
-                    builder.append("");
-                } else {
-                    isFrontZero = false;
-                    builder.append(chars[i]);
-                }
+        if (source.charAt(0) == 45 || source.charAt(0) == 43) {
+            if (source.charAt(0) == 45) {
+                isNavigate = true;
             }
-        }
-        return builder.toString();
-    }
-
-    public String extractDigitalString(String source) {
-        StringBuilder builder = new StringBuilder();
-        if (source == null || source.equals("0")) {
-            return "";
-        }
-        source = source.trim();
-        char[] chars = source.toCharArray();
-        boolean isMinus = false;
-        boolean isPlus = false;
-        boolean isDigital = false;
-
-        for (int i = 0; i < chars.length; i++) {
-            //减号
-            char ch = chars[i];
-            if (isMinus || isPlus) {
-                if (ch >= 48 && ch <= 57) {
-                    builder.append(ch);
+            if (source.length() > 1) {
+                if (!isDigit(source.charAt(1))) {
+                    return 0;
                 } else {
-                    return builder.toString();
-                }
-            } else {
-                if (ch == 45 || ch == 43) {
-                    if (isDigital) {
-                        return builder.toString();
-                    } else {
-                        if (isPlus || isMinus) {
-                            return "";
+                    for (int i = 1; i < source.length(); i++) {
+                        if (isDigit(source.charAt(i))) {
+                            builder.append(source.charAt(i));
                         } else {
-                            builder.append(ch);
-                            if (ch == 45) {
-                                isMinus = true;
-                            } else {
-                                isPlus = true;
-                            }
+                            break;
                         }
                     }
-                } else if (ch >= 48 && ch <= 57) {
-                    isDigital = true;
-                    builder.append(ch);
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            //首位非数字
+            if (!isDigit(source.charAt(0))) {
+                return 0;
+            }
+
+            for (int i = 0; i < source.length(); i++) {
+                if (isDigit(source.charAt(i))) {
+                    builder.append(source.charAt(i));
                 } else {
-                    return builder.toString();
+                    break;
                 }
             }
         }
-        return builder.toString();
+
+        long result;
+        if (isNavigate) {
+            builder.insert(0, "-");
+        }
+        try {
+            result = Long.parseLong(builder.toString());
+        } catch (NumberFormatException e) {
+            if (isNavigate){
+                return Integer.MIN_VALUE;
+            }else{
+                return Integer.MAX_VALUE;
+            }
+        }
+
+        if (result > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        if (result < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        return (int) result;
+
     }
 
-
+    public static boolean isDigit(char ch) {
+        return ch >= 48 && ch <= 57;
+    }
 }

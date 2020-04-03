@@ -3,45 +3,79 @@ import java.util.Stack;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(reverse(-2147483648));
+        System.out.println(myAtoi("-91283472332"));
     }
 
-
-    public static int reverse(int x) {
-
-        long result = 0;
-        Stack<Integer> stack = new Stack<>();
-        boolean isNegative = x < 0;
-        long longX = x;
-        if (isNegative) {
-            longX = -longX;
-        }
-
-        if (longX < 10) {
-            return x;
-        }
-        int num;
-        while (longX > 0) {
-            num = (int) (longX % 10);
-            stack.push(num);
-            longX = longX / 10;
-        }
-        int index = 0;
-        while (!stack.empty()) {
-            result += Math.pow(10, index) * stack.pop();
-            index++;
-        }
-        if (isNegative) {
-            result = 0 - result;
-        }
-        //比较边界值
-        if (result <= Integer.MIN_VALUE) {
+    public static int myAtoi(String str) {
+        if (str == null || str.length() == 0) {
             return 0;
         }
-        if (result >= Integer.MAX_VALUE) {
+        String source = str.trim();
+        if (source.length() == 0) {
             return 0;
+        }
+        boolean isNavigate = false;
+        StringBuilder builder = new StringBuilder();
+        if (source.charAt(0) == 45 || source.charAt(0) == 43) {
+            if (source.charAt(0) == 45) {
+                isNavigate = true;
+            }
+            if (source.length() > 1) {
+                if (!isDigit(source.charAt(1))) {
+                    return 0;
+                } else {
+                    for (int i = 1; i < source.length(); i++) {
+                        if (isDigit(source.charAt(i))) {
+                            builder.append(source.charAt(i));
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            //首位非数字
+            if (!isDigit(source.charAt(0))) {
+                return 0;
+            }
+
+            for (int i = 0; i < source.length(); i++) {
+                if (isDigit(source.charAt(i))) {
+                    builder.append(source.charAt(i));
+                } else {
+                    break;
+                }
+            }
+        }
+
+        long result;
+        if (isNavigate) {
+            builder.insert(0, "-");
+        }
+        try {
+            result = Long.parseLong(builder.toString());
+        } catch (NumberFormatException e) {
+            if (isNavigate){
+                return Integer.MIN_VALUE;
+            }else{
+                return Integer.MAX_VALUE;
+            }
+        }
+
+        if (result > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        if (result < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
         }
         return (int) result;
+
+    }
+
+    public static boolean isDigit(char ch) {
+        return ch >= 48 && ch <= 57;
     }
 
 }
