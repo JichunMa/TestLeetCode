@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+package number560;
 
-public class Main {
+import java.util.HashMap;
+
+public class Solution {
 
     public static void main(String[] args) {
         int[] nums = {1, 1, 1};
@@ -36,6 +35,8 @@ public class Main {
         return result;
     }
 
+
+    //题两数之和 两题比较类似
     public static int[] twoSum(int[] nums, int target) {
         //前为值 后为索引
         HashMap<Integer, Integer> hashMap = new HashMap<>();
@@ -51,6 +52,4 @@ public class Main {
         }
         return result;
     }
-
 }
-
