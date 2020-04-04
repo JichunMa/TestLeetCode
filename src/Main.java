@@ -6,70 +6,24 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(getStringLetterGroup("ads"));
+        int[] nums = {3, 2, 4};
+        twoSum(nums, 6);
     }
 
-
-    public static List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> result = new ArrayList<>();
-        HashMap<String, List<String>> hashMap = new HashMap();
-        for (int i = 0; i < strs.length; i++) {
-
-            String key = getStringLetterGroup(strs[i]);
-            if (hashMap.containsKey(key)) {
-                List<String> list = hashMap.get(key);
-                list.add(strs[i]);
+    public static int[] twoSum(int[] nums, int target) {
+        //前为值 后为索引
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int[] result = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.containsKey(target - nums[i])) {
+                result[0] = hashMap.get(target - nums[1]);
+                result[1] = i;
+                break;
             } else {
-                List<String> list = new ArrayList<>();
-                list.add(strs[i]);
-                hashMap.put(key, list);
+                hashMap.put(nums[i], i);
             }
-        }
-        Iterator iterator = hashMap.keySet().iterator();
-        while (iterator.hasNext()) {
-            result.add(hashMap.get(iterator.next()));
         }
         return result;
-    }
-
-    public static String getStringLetterGroup(String source) {
-        int[] counts = new int[26];
-        char[] keys = {'a', 'b', 'c', 'd',
-                'e',
-                'f',
-                'g',
-                'h',
-                'i',
-                'j',
-                'k',
-                'l',
-                'm',
-                'n',
-                'o',
-                'p',
-                'q',
-                'r',
-                's',
-                't',
-                'u',
-                'v',
-                'w',
-                'x',
-                'y',
-                'z'};
-        for (int i = 0; i < source.length(); i++) {
-            int index = source.charAt(i) - 'a';
-            counts[index] = counts[index] + 1;
-        }
-
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < counts.length; i++) {
-            if (counts[i] != 0) {
-                builder.append(keys[i]);
-                builder.append(counts[i]);
-            }
-        }
-        return builder.toString();
     }
 
 }

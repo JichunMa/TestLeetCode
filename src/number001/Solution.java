@@ -1,6 +1,7 @@
 package number001;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Solution {
     public static void main(String[] args) {
@@ -10,23 +11,20 @@ public class Solution {
         System.out.println(Arrays.toString(results));
     }
 
-    public int[] twoSum(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return null;
-        }
-        int firstNum;
-        int secondNum;
+    public static int[] twoSum(int[] nums, int target) {
+        //前为值 后为索引
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int[] result = new int[2];
         for (int i = 0; i < nums.length; i++) {
-            firstNum = nums[i];
-            for (int j = i + 1; j < nums.length; j++) {
-                secondNum = nums[j];
-                if (firstNum + secondNum == target) {
-                    int[] result = {i, j};
-                    return result;
-                }
+            if (hashMap.containsKey(target - nums[i])) {
+                result[0] = hashMap.get(target - nums[1]);
+                result[1] = i;
+                break;
+            } else {
+                hashMap.put(nums[i], i);
             }
         }
-        return null;
+        return result;
     }
 
 
