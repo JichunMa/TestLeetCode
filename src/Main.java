@@ -7,6 +7,7 @@ import java.util.Queue;
 
 public class Main {
 
+
     public static void main(String[] args) {
         TreeNode treeNode1 = new TreeNode(4);
         TreeNode treeNode2_1 = new TreeNode(2);
