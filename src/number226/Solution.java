@@ -1,15 +1,8 @@
+package number226;
+
 import number098.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
-
-    public static void main(String[] args) {
-
-    }
-
-
+public class Solution {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
@@ -29,6 +22,4 @@ public class Main {
         root.right = tmp;
         return root;
     }
-
 }
-
