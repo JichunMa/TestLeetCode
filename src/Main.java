@@ -19,9 +19,7 @@ public class Main {
         nodeRoot1_1.right = nodeRoot1_3;
         nodeRoot1_2.left = nodeRoot1_4;
         nodeRoot1_2.right = nodeRoot1_5;
-
     }
-
 
 
 
