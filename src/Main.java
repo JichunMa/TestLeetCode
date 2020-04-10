@@ -1,27 +1,60 @@
 import number098.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Main {
 
 
     public static void main(String[] args) {
 
-        TreeNode nodeRoot1_1 = new TreeNode(1);
-        TreeNode nodeRoot1_2 = new TreeNode(2);
-        TreeNode nodeRoot1_3 = new TreeNode(3);
-        TreeNode nodeRoot1_4 = new TreeNode(4);
-        TreeNode nodeRoot1_5 = new TreeNode(5);
-        nodeRoot1_1.left = nodeRoot1_2;
-        nodeRoot1_1.right = nodeRoot1_3;
-        nodeRoot1_2.left = nodeRoot1_4;
-        nodeRoot1_2.right = nodeRoot1_5;
+        Main main = new Main();
+        String source = "{[]}";
+        System.out.println(main.isValid(source));
     }
 
 
+    public boolean isValid(String s) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        Stack<Character> stack = new Stack<>();
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            char ch = s.charAt(i);
+            if (getType(ch) < 0) {
+                stack.push(ch);
+            } else {
+                if (stack.empty()) {
+                    return false;
+                }
+                char charStackTop = stack.pop();
+                if (getType(ch) + getType(charStackTop) == 0) {
+                    //匹配则继续
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.empty();
+
+    }
+
+    public int getType(char ch) {
+        if (ch == '(') {
+            return -1;
+        } else if (ch == ')') {
+            return 1;
+        } else if (ch == '[') {
+            return -2;
+        } else if (ch == ']') {
+            return 2;
+        } else if (ch == '{') {
+            return -3;
+        } else {
+            return 3;
+        }
+    }
 
 
 }
