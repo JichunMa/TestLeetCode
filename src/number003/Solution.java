@@ -1,23 +1,37 @@
 package number003;
 
+import java.util.HashMap;
+
+/**
+ * 解题思路
+ * 求两个重复的字符之间的字串的最大长度
+ */
 public class Solution {
+
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        boolean result = solution.isPalindrome(10);
-        System.out.println(result);
+        String source = "abba";
+        System.out.println(lengthOfLongestSubstring(source));
     }
-    public boolean isPalindrome(int x) {
-        if (x < 0) {
-            return false;
+
+
+    public static int lengthOfLongestSubstring(String s) {
+        if (s == null || s.equals("")) {
+            return 0;
         }
-        String data = String.valueOf(x);
-        char[] chars = data.toCharArray();
-        int length = chars.length;
-        for (int i = 0; i < length / 2; i++) {
-            if (chars[i] != chars[length - i - 1]) {
-                return false;
+
+        int max = 0;
+        int pre = -1;//上一个出现重复的索引
+        HashMap<Character, Integer> map = new HashMap<>();
+        int strLen = s.length();
+        for (int i = 0; i < strLen; i++) {
+            Character ch = s.charAt(i);
+            Integer index = map.get(ch);
+            if (index != null) {
+                pre = Math.max(pre, index);
             }
+            max = Math.max(max, i - pre);
+            map.put(ch, i);
         }
-        return true;
+        return max;
     }
 }
