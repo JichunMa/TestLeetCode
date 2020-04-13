@@ -1,6 +1,7 @@
 package number088;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
@@ -13,29 +14,11 @@ public class Solution {
         }
     }
 
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        ArrayList<Integer> list = new ArrayList();
-        int indexOne = 0;
-        int indexTwo = 0;
-        while (indexOne < m && indexTwo < n) {
-            if (nums1[indexOne] < nums2[indexTwo]) {
-                list.add(nums1[indexOne]);
-                indexOne++;
-            } else {
-                list.add(nums2[indexTwo]);
-                indexTwo++;
-            }
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = 0; i < n; i++) {
+            nums1[m + i] = nums2[2];
         }
-        while (indexOne < m) {
-            list.add(nums1[indexOne]);
-            indexOne++;
-        }
-        while (indexTwo < n) {
-            list.add(nums2[indexTwo]);
-            indexTwo++;
-        }
-        for (int i = 0; i < list.size(); i++) {
-            nums1[i] = list.get(i);
-        }
+        Arrays.sort(nums1);
     }
+
 }
