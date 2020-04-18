@@ -15,27 +15,15 @@ public class Solution {
         if (nums.length == 0) {
             return 0;
         }
-        int resultsLength = 1;
-        int index = -1;
-        int lastDigit = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            if (index == -1) {
-                if (nums[i] == lastDigit) {
-                    index = i;
-                } else {
-                    lastDigit = nums[i];
-                    resultsLength++;
-                }
-            } else {
-                if (nums[i] != lastDigit) {
-                    lastDigit = nums[i];
-                    nums[index] = nums[i];
-                    index++;
-                    resultsLength++;
-                }
+        int lastValue = nums[0];
+        int i = 1;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != lastValue) {
+                nums[i] = nums[j];
+                i++;
+                lastValue = nums[j];
             }
         }
-        return resultsLength;
-
+        return i;
     }
 }
