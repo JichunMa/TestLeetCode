@@ -9,8 +9,9 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        System.out.println(mySqrt(2147483647));
+
     }
+
 
 
     public static int mySqrt(int x) {
@@ -26,7 +27,4 @@ public class Solution {
         }
         return 0;
     }
-
-
-
 }
