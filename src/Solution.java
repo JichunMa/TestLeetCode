@@ -9,24 +9,24 @@ public class Solution {
 
 
     public static void main(String[] args) {
+        System.out.println(mySqrt(2147483647));
     }
 
 
-    public int lengthOfLastWord(String s) {
-        if (s == null) {
-            return 0;
+    public static int mySqrt(int x) {
+        for (long i = 0; i <= x; i++) {
+            long tmp = i * i;
+            if (tmp == x) {
+                return (int) i;
+            } else {
+                if (tmp > x) {
+                    return (int) (i - 1);
+                }
+            }
         }
-        if (s.trim().length() == 0) {
-            return 0;
-        }
-        if (s.indexOf(" ") == -1 || s.indexOf(" ") == s.length() - 1) {
-            return 0;
-        }
-
-        String[] strings = s.split(" ");
-        return strings[strings.length - 1].length();
-
+        return 0;
     }
+
 
 
 }
