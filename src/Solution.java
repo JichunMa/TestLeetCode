@@ -13,18 +13,4 @@ public class Solution {
     }
 
 
-
-    public static int mySqrt(int x) {
-        for (long i = 0; i <= x; i++) {
-            long tmp = i * i;
-            if (tmp == x) {
-                return (int) i;
-            } else {
-                if (tmp > x) {
-                    return (int) (i - 1);
-                }
-            }
-        }
-        return 0;
-    }
 }
