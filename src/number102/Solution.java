@@ -1,5 +1,7 @@
 package number102;
 
+import number098.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
