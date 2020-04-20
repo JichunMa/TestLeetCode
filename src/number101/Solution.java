@@ -1,6 +1,8 @@
 package number101;
 
 
+import number098.TreeNode;
+
 import java.util.ArrayList;
 
 public class Solution {
