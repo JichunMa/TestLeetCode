@@ -15,5 +15,4 @@ public class Solution {
         Solution solution = new Solution();
     }
 
-
 }
