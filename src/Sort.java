@@ -99,7 +99,7 @@ public class Sort {
         int n = nums.length;
         //分组
         for (int k = n / 2; k > 0; k = k / 2) {
-            // i 相当于组内的最后一个元素
+            // i 相当于组内的第二个元素，认为第一个元素已经是一个有序的序列
             for (int i = k; i < n; i++) {
                 //组内进行插入排序
                 for (int j = i; j - k >= 0; j = j - k) {
